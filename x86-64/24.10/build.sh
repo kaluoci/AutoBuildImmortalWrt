@@ -6,20 +6,9 @@ echo "编译固件大小为: $PROFILE MB"
 echo "Include Docker: $INCLUDE_DOCKER"
 
 # 添加第三方软件包
-echo "添加第三方软件包仓库..."
-    
-# 备份原始feeds.conf.default
-cp feeds.conf.default feeds.conf.default.backup
-    
-# 添加常用的第三方仓库
-cat >> feeds.conf.default <<EOF
-# 第三方软件包
-src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main
-EOF
-    
 echo "更新软件包列表..."
 ./scripts/feeds update -a
-./scripts/feeds install -a
+./scripts/feeds install -a -f -p passwall2 
 
 
 echo "Create pppoe-settings"
